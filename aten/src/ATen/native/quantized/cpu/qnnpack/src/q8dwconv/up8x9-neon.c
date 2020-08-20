@@ -36,7 +36,7 @@ void pytorch_q8dwconv_ukernel_up8x9__neon(
   const uint8x8_t voutput_max =
       vld1_dup_u8(&quantization_params->neon.output_max);
 
-#ifdef __aarch64__
+#ifdef __aarch64__ || __gptx__
   /* Larger number of registers on AArch64 make it possible to process few
    * pixels at a time */
   if (input_stride == 3 * sizeof(void*)) {
@@ -778,7 +778,7 @@ void pytorch_q8dwconv_ukernel_up8x9__neon(
       vacc_lo = vrshlq_s32(vacc_lo, vright_shift);
       vacc_hi = vrshlq_s32(vacc_hi, vright_shift);
 
-#ifdef __aarch64__
+#ifdef __aarch64__ || __gptx__
       const int16x8_t vacc = vqaddq_s16(
           vqmovn_high_s32(vqmovn_s32(vacc_lo), vacc_hi), voutput_zero_point);
 #else
@@ -931,7 +931,7 @@ void pytorch_q8dwconv_ukernel_up8x9__neon(
       vacc_lo = vrshlq_s32(vacc_lo, vright_shift);
       vacc_hi = vrshlq_s32(vacc_hi, vright_shift);
 
-#ifdef __aarch64__
+#ifdef __aarch64__ || __gptx__
       const int16x8_t vacc = vqaddq_s16(
           vqmovn_high_s32(vqmovn_s32(vacc_lo), vacc_hi), voutput_zero_point);
 #else

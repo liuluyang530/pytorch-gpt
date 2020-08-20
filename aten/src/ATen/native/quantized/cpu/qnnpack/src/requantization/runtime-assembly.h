@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-#ifdef __aarch64__
+#ifdef __aarch64__ || __gptx__
 
 .macro SUB_ZERO_POINT vout, vin1, vin2
 #if PYTORCH_QNNPACK_RUNTIME_QUANTIZATION

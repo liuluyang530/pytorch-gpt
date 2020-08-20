@@ -70,7 +70,7 @@ inline void winograd_f2k3_output_transform_inplace__neon(
 
 inline float32x4_t
 vmuladdq_f32(const float32x4_t c, const float32x4_t a, const float32x4_t b) {
-#if defined(__aarch64__)
+#if defined(__aarch64__) || defined(__gptx__)
   return vfmaq_f32(c, a, b);
 #else
   return vmlaq_f32(c, a, b);
@@ -79,7 +79,7 @@ vmuladdq_f32(const float32x4_t c, const float32x4_t a, const float32x4_t b) {
 
 inline float32x4_t
 vmulsubq_f32(const float32x4_t c, const float32x4_t a, const float32x4_t b) {
-#if defined(__aarch64__)
+#if defined(__aarch64__) || defined(__gptx__)
   return vfmsq_f32(c, a, b);
 #else
   return vmlsq_f32(c, a, b);

@@ -26,7 +26,7 @@ void pytorch_qnnp_requantize_fp32__neon(
   assert(scale >= 0x1.0p-32f);
 
   const float32x4_t vscale = vdupq_n_f32(scale);
-#ifdef __aarch64__
+#ifdef __aarch64__ || __gptx__
   const int16x8_t vzero_point = vdupq_n_s16((int16_t)(uint16_t)zero_point);
   const uint8x16_t vqmin = vdupq_n_u8(qmin);
   const uint8x16_t vqmax = vdupq_n_u8(qmax);
@@ -61,7 +61,7 @@ void pytorch_qnnp_requantize_fp32__neon(
     const float32x4_t z_scaled = vmulq_f32(vcvtq_f32_s32(z), vscale);
     const float32x4_t w_scaled = vmulq_f32(vcvtq_f32_s32(w), vscale);
 
-#ifdef __aarch64__
+#ifdef __aarch64__ || __gptx__
     /*
      * Leverage "Floating-point Convert to Signed integer, rounding to nearest
      * with ties to even" instruction. This is an ARMv8 instruction (always

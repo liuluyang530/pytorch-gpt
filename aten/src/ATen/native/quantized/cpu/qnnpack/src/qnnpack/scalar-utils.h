@@ -42,7 +42,8 @@
 PYTORCH_QNNP_IGNORE_SHIFT_BASE_UB
 inline static int32_t asr_s32(int32_t x, uint32_t n) {
 #ifdef PYTORCH_QNNP_USE_SHIFT_BASE_UB_WORKAROUND
-#if defined(__x86_64__) || defined(__aarch64__)
+#if defined(__x86_64__) || defined(__aarch64__) || defined(__gptx__)
+
   return (int32_t)((uint64_t)(int64_t)x >> n);
 #else
   return x >= 0 ? x >> n : ~(~x >> n);

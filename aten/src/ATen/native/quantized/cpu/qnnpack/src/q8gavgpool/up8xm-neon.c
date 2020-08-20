@@ -62,7 +62,7 @@ void pytorch_q8gavgpool_ukernel_up8xm__neon(
     vacc_hi = vaddw_s16(vacc_hi, vget_high_s16(vxinput));
   }
 
-#ifdef __aarch64__
+#ifdef __aarch64__ || __gptx__
   const int32x4_t vmultiplier =
       vld1q_dup_s32(&quantization_params->neon.multiplier);
 #else
@@ -83,7 +83,8 @@ void pytorch_q8gavgpool_ukernel_up8xm__neon(
   const int32x4_t vneg_mask_hi =
       vreinterpretq_s32_u32(vcltq_s32(vacc_hi, vmovq_n_s32(0)));
 
-#if defined(__aarch64__)
+#if defined(__aarch64__) || defined(__gptx__)
+
   const int64x2_t vproduct01 =
       vmull_s32(vget_low_s32(vacc_lo), vget_low_s32(vmultiplier));
   const int64x2_t vproduct23 = vmull_high_s32(vacc_lo, vmultiplier);
@@ -120,7 +121,7 @@ void pytorch_q8gavgpool_ukernel_up8xm__neon(
   const int64x2_t vscaled_acc45 = vrshlq_s64(vadjusted_product45, vleft_shift);
   const int64x2_t vscaled_acc67 = vrshlq_s64(vadjusted_product67, vleft_shift);
 
-#ifdef __aarch64__
+#ifdef __aarch64__ || __gptx__
   vacc_lo = vuzp1q_s32(
       vreinterpretq_s32_s64(vscaled_acc01),
       vreinterpretq_s32_s64(vscaled_acc23));
