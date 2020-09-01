@@ -8,6 +8,7 @@
 
 #include <qnnpack/assembly.h>
 #include <requantization/runtime-assembly.h>
+#if 0
 
 # r0 mr
 # r1 nr
@@ -764,3 +765,6 @@ END_FUNCTION pytorch_q8gemm_dq_ukernel_4x8__aarch32_neon
 #ifdef __ELF__
 .section ".note.GNU-stack","",%progbits
 #endif
+
+#endif
+

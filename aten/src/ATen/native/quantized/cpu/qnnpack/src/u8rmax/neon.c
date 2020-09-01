@@ -8,10 +8,10 @@
 
 #include <assert.h>
 
-#include <arm_neon.h>
+//#include <arm_neon.h>
 
 #include <qnnpack/u8rmax.h>
-
+#if 0
 uint8_t pytorch_u8rmax_ukernel__neon(size_t n, const uint8_t* x) {
   assert(n != 0);
 
@@ -46,3 +46,5 @@ uint8_t pytorch_u8rmax_ukernel__neon(size_t n, const uint8_t* x) {
     return vget_lane_u8(vmax, 0);
   }
 }
+#endif
+

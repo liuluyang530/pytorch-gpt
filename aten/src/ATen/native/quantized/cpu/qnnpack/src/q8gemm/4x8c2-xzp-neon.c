@@ -6,10 +6,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-#include <arm_neon.h>
+//#include <arm_neon.h>
 
 #include <qnnpack/q8gemm.h>
-
+#if 0
 void pytorch_q8gemm_xzp_ukernel_4x8c2__neon(
     size_t mr,
     size_t nr,
@@ -419,7 +419,7 @@ void pytorch_q8gemm_xzp_ukernel_4x8c2__neon(
 
   const int16x8_t vzero_point =
       vld1q_dup_s16(&requantization_params->neon.zero_point);
-#ifdef __aarch64__ || __gptx__
+#if defined(__aarch64__) || defined(__gptx__)
   const int16x8_t vacc0x01234567 = vqaddq_s16(
       vqmovn_high_s32(vqmovn_s32(vacc0x0123), vacc0x4567), vzero_point);
   const int16x8_t vacc1x01234567 = vqaddq_s16(
@@ -541,3 +541,5 @@ void pytorch_q8gemm_xzp_ukernel_4x8c2__neon(
     }
   }
 }
+#endif
+

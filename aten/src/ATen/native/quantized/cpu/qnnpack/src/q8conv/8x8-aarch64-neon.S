@@ -9,7 +9,7 @@
 #include <qnnpack/assembly.h>
 #include <requantization/runtime-assembly.h>
 
-
+#if 0
 # void pytorch_q8conv_ukernel_8x8__aarch64_neon(
 #    size_t mr,
 #    size_t nr,
@@ -762,4 +762,6 @@ END_FUNCTION pytorch_q8conv_ukernel_8x8__aarch64_neon
 
 #ifdef __ELF__
 .section ".note.GNU-stack","",%progbits
+#endif
+
 #endif

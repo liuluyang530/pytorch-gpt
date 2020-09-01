@@ -51,16 +51,16 @@ static void init(void) {
     return;
   }
   pytorch_qnnp_params.q8conv = (struct pytorch_q8conv_parameters){
-      .gemm = pytorch_q8gemm_ukernel_4x8__aarch32_neon,
-      .conv = pytorch_q8conv_ukernel_4x8__aarch32_neon,
-      .gemm_dq = pytorch_q8gemm_dq_ukernel_4x8__aarch32_neon,
+      //.gemm = pytorch_q8gemm_ukernel_4x8__aarch32_neon,
+      //.conv = pytorch_q8conv_ukernel_4x8__aarch32_neon,
+      //.gemm_dq = pytorch_q8gemm_dq_ukernel_4x8__aarch32_neon,
       .mr = 4,
       .nr = 8,
       .kr = 1,
   };
 #if !PYTORCH_QNNPACK_RUNTIME_QUANTIZATION
   pytorch_qnnp_params.q8conv_xzp = (struct pytorch_q8conv_xzp_parameters){
-      .gemm = pytorch_q8gemm_xzp_ukernel_4x8c2__aarch32_neon,
+      //.gemm = pytorch_q8gemm_xzp_ukernel_4x8c2__aarch32_neon,
       .mr = 4,
       .nr = 8,
       .kr = 2,
@@ -90,55 +90,55 @@ static void init(void) {
   };
 #endif
   pytorch_qnnp_params.q8dw9 = (struct pytorch_q8dwconv_up_parameters){
-      .updw = pytorch_q8dwconv_ukernel_up8x9__aarch32_neon,
+      //.updw = pytorch_q8dwconv_ukernel_up8x9__aarch32_neon,
       .cr = 8,
   };
   pytorch_qnnp_params.q8dw25 = (struct pytorch_q8dwconv_mp_parameters){
-      .mpdw = pytorch_q8dwconv_ukernel_mp8x25__neon,
+      //.mpdw = pytorch_q8dwconv_ukernel_mp8x25__neon,
       .cr = 8,
   };
   pytorch_qnnp_params.q8sum_rows = (struct pytorch_q8sum_rows_parameters){
-      .sum_rows = pytorch_q8sumrows_ukernel_4x__neon,
+      //.sum_rows = pytorch_q8sumrows_ukernel_4x__neon,
       .m = 4,
   };
-  pytorch_qnnp_params.q8vadd = pytorch_q8vadd_ukernel__neon;
+  //pytorch_qnnp_params.q8vadd = pytorch_q8vadd_ukernel__neon;
   pytorch_qnnp_params.q8gavgpool = (struct pytorch_q8gavgpool_parameters){
-      .ltnr = pytorch_q8gavgpool_ukernel_up8xm__neon,
-      .genr_lemr = pytorch_q8gavgpool_ukernel_up8x7__neon,
-      .genr_gtmr = pytorch_q8gavgpool_ukernel_mp8x7p7q__neon,
+      //.ltnr = pytorch_q8gavgpool_ukernel_up8xm__neon,
+      //.genr_lemr = pytorch_q8gavgpool_ukernel_up8x7__neon,
+      //.genr_gtmr = pytorch_q8gavgpool_ukernel_mp8x7p7q__neon,
       .mr = 7,
       .nr = 8,
   };
   pytorch_qnnp_params.q8avgpool = (struct pytorch_q8avgpool_parameters){
-      .ltkr = pytorch_q8avgpool_ukernel_up8xm__neon,
-      .gekr_lemr = pytorch_q8avgpool_ukernel_up8x9__neon,
-      .gekr_gtmr = pytorch_q8avgpool_ukernel_mp8x9p8q__neon,
+      //.ltkr = pytorch_q8avgpool_ukernel_up8xm__neon,
+      //.gekr_lemr = pytorch_q8avgpool_ukernel_up8x9__neon,
+      //.gekr_gtmr = pytorch_q8avgpool_ukernel_mp8x9p8q__neon,
       .mr = 9,
       .qr = 8,
       .kr = 8,
   };
   pytorch_qnnp_params.u8maxpool = (struct pytorch_u8maxpool_parameters){
-      .ltkr = pytorch_u8maxpool_ukernel_sub16__neon,
-      .gekr = pytorch_u8maxpool_ukernel_16x9p8q__neon,
+      //.ltkr = pytorch_u8maxpool_ukernel_sub16__neon,
+      //.gekr = pytorch_u8maxpool_ukernel_16x9p8q__neon,
       .mr = 9,
       .qr = 8,
       .kr = 16,
   };
   pytorch_qnnp_params.x8zip = (struct pytorch_x8zip_parameters){
-      .x2 = pytorch_qnnp_x8zip_x2__neon,
-      .x3 = pytorch_qnnp_x8zip_x3__neon,
-      .x4 = pytorch_qnnp_x8zip_x4__neon,
-      .xm = pytorch_qnnp_x8zip_xm__neon,
+      //.x2 = pytorch_qnnp_x8zip_x2__neon,
+      //.x3 = pytorch_qnnp_x8zip_x3__neon,
+      //.x4 = pytorch_qnnp_x8zip_x4__neon,
+      //.xm = pytorch_qnnp_x8zip_xm__neon,
   };
-  pytorch_qnnp_params.u8clamp = pytorch_u8clamp_ukernel__neon;
-  pytorch_qnnp_params.u8rmax = pytorch_u8rmax_ukernel__neon;
+  //pytorch_qnnp_params.u8clamp = pytorch_u8clamp_ukernel__neon;
+  //pytorch_qnnp_params.u8rmax = pytorch_u8rmax_ukernel__neon;
   pytorch_qnnp_params.u8lut32norm = pytorch_u8lut32norm_ukernel__scalar;
   pytorch_qnnp_params.x8lut = pytorch_x8lut_ukernel__scalar;
 #elif CPUINFO_ARCH_ARM64
   pytorch_qnnp_params.q8conv = (struct pytorch_q8conv_parameters){
-      .gemm = pytorch_q8gemm_ukernel_8x8__aarch64_neon,
-      .conv = pytorch_q8conv_ukernel_8x8__aarch64_neon,
-      .gemm_dq = pytorch_q8gemm_dq_ukernel_8x8__aarch64_neon,
+      //.gemm = pytorch_q8gemm_ukernel_8x8__aarch64_neon,
+      //.conv = pytorch_q8conv_ukernel_8x8__aarch64_neon,
+      //.gemm_dq = pytorch_q8gemm_dq_ukernel_8x8__aarch64_neon,
       .mr = 8,
       .nr = 8,
       .kr = 1,
@@ -147,46 +147,46 @@ static void init(void) {
       .kthreshold = SIZE_MAX,
   };
   pytorch_qnnp_params.q8dw9 = (struct pytorch_q8dwconv_up_parameters){
-      .updw = pytorch_q8dwconv_ukernel_up8x9__neon,
+      //.updw = pytorch_q8dwconv_ukernel_up8x9__neon,
       .cr = 8,
   };
   pytorch_qnnp_params.q8dw25 = (struct pytorch_q8dwconv_mp_parameters){
-      .mpdw = pytorch_q8dwconv_ukernel_mp8x25__neon,
+      //.mpdw = pytorch_q8dwconv_ukernel_mp8x25__neon,
       .cr = 8,
   };
-  pytorch_qnnp_params.q8vadd = pytorch_q8vadd_ukernel__neon;
+  //pytorch_qnnp_params.q8vadd = pytorch_q8vadd_ukernel__neon;
   pytorch_qnnp_params.q8gavgpool = (struct pytorch_q8gavgpool_parameters){
-      .ltnr = pytorch_q8gavgpool_ukernel_up8xm__neon,
-      .genr_lemr = pytorch_q8gavgpool_ukernel_up8x7__neon,
-      .genr_gtmr = pytorch_q8gavgpool_ukernel_mp8x7p7q__neon,
+      //.ltnr = pytorch_q8gavgpool_ukernel_up8xm__neon,
+      //.genr_lemr = pytorch_q8gavgpool_ukernel_up8x7__neon,
+      //.genr_gtmr = pytorch_q8gavgpool_ukernel_mp8x7p7q__neon,
       .mr = 7,
       .nr = 8,
   };
   pytorch_qnnp_params.q8avgpool = (struct pytorch_q8avgpool_parameters){
-      .ltkr = pytorch_q8avgpool_ukernel_up8xm__neon,
-      .gekr_lemr = pytorch_q8avgpool_ukernel_up8x9__neon,
-      .gekr_gtmr = pytorch_q8avgpool_ukernel_mp8x9p8q__neon,
+      //.ltkr = pytorch_q8avgpool_ukernel_up8xm__neon,
+      //.gekr_lemr = pytorch_q8avgpool_ukernel_up8x9__neon,
+      //.gekr_gtmr = pytorch_q8avgpool_ukernel_mp8x9p8q__neon,
       .mr = 9,
       .qr = 8,
       .kr = 8,
   };
   pytorch_qnnp_params.u8maxpool = (struct pytorch_u8maxpool_parameters){
-      .ltkr = pytorch_u8maxpool_ukernel_sub16__neon,
-      .gekr = pytorch_u8maxpool_ukernel_16x9p8q__neon,
+      //.ltkr = pytorch_u8maxpool_ukernel_sub16__neon,
+      //.gekr = pytorch_u8maxpool_ukernel_16x9p8q__neon,
       .mr = 9,
       .qr = 8,
       .kr = 16,
   };
   pytorch_qnnp_params.x8zip = (struct pytorch_x8zip_parameters){
-      .x2 = pytorch_qnnp_x8zip_x2__neon,
-      .x3 = pytorch_qnnp_x8zip_x3__neon,
-      .x4 = pytorch_qnnp_x8zip_x4__neon,
-      .xm = pytorch_qnnp_x8zip_xm__neon,
+      //.x2 = pytorch_qnnp_x8zip_x2__neon,
+      //.x3 = pytorch_qnnp_x8zip_x3__neon,
+      //.x4 = pytorch_qnnp_x8zip_x4__neon,
+      //.xm = pytorch_qnnp_x8zip_xm__neon,
   };
-  pytorch_qnnp_params.u8clamp = pytorch_u8clamp_ukernel__neon;
-  pytorch_qnnp_params.u8rmax = pytorch_u8rmax_ukernel__neon;
-  pytorch_qnnp_params.u8lut32norm = pytorch_u8lut32norm_ukernel__scalar;
-  pytorch_qnnp_params.x8lut = pytorch_x8lut_ukernel__scalar;
+  //pytorch_qnnp_params.u8clamp = pytorch_u8clamp_ukernel__neon;
+  //pytorch_qnnp_params.u8rmax = pytorch_u8rmax_ukernel__neon;
+  //pytorch_qnnp_params.u8lut32norm = pytorch_u8lut32norm_ukernel__scalar;
+  //pytorch_qnnp_params.x8lut = pytorch_x8lut_ukernel__scalar;
 #elif CPUINFO_ARCH_X86 || CPUINFO_ARCH_X86_64
   if (!cpuinfo_has_x86_sse2()) {
     pytorch_qnnp_log_error(

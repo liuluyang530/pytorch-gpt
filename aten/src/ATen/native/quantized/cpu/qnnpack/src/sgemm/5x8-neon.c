@@ -6,10 +6,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-#include <arm_neon.h>
+//#include <arm_neon.h>
 
 #include <qnnpack/sgemm.h>
-
+#if 0
 void pytorch_sgemm_ukernel_5x8__neon(
     size_t mr,
     size_t nr,
@@ -269,3 +269,5 @@ void pytorch_sgemm_ukernel_5x8__neon(
     }
   }
 }
+#endif
+

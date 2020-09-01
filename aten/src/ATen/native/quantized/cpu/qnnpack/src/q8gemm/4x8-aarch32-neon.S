@@ -10,7 +10,7 @@
 #include <requantization/runtime-assembly.h>
 
 .syntax unified
-
+#if 0
 # void pytorch_q8gemm_ukernel_4x8__aarch32_neon(
 #     size_t mr,
 #     size_t nr,
@@ -793,3 +793,6 @@ END_FUNCTION pytorch_q8gemm_ukernel_4x8__aarch32_neon
 #ifdef __ELF__
 .section ".note.GNU-stack","",%progbits
 #endif
+
+#endif
+

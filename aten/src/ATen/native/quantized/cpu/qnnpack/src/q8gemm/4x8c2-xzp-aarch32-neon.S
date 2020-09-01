@@ -10,6 +10,8 @@
 
 .syntax unified
 
+#if 0
+
 # void pytorch_q8gemm_xzp_ukernel_4x8c2__neon(
 #     size_t mr,
 #     size_t nr,
@@ -616,3 +618,6 @@ END_FUNCTION pytorch_q8gemm_xzp_ukernel_4x8c2__aarch32_neon
 #ifdef __ELF__
 .section ".note.GNU-stack","",%progbits
 #endif
+
+#endif
+

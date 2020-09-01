@@ -8,10 +8,10 @@
 
 #include <assert.h>
 
-#include <arm_neon.h>
+//#include <arm_neon.h>
 
 #include <qnnpack/q8gavgpool.h>
-
+#if 0
 void pytorch_q8gavgpool_ukernel_up8xm__neon(
     size_t m,
     size_t n,
@@ -62,7 +62,7 @@ void pytorch_q8gavgpool_ukernel_up8xm__neon(
     vacc_hi = vaddw_s16(vacc_hi, vget_high_s16(vxinput));
   }
 
-#ifdef __aarch64__ || __gptx__
+#if defined(__aarch64__) || defined(__gptx__)
   const int32x4_t vmultiplier =
       vld1q_dup_s32(&quantization_params->neon.multiplier);
 #else
@@ -121,7 +121,7 @@ void pytorch_q8gavgpool_ukernel_up8xm__neon(
   const int64x2_t vscaled_acc45 = vrshlq_s64(vadjusted_product45, vleft_shift);
   const int64x2_t vscaled_acc67 = vrshlq_s64(vadjusted_product67, vleft_shift);
 
-#ifdef __aarch64__ || __gptx__
+#if defined(__aarch64__) || defined(__gptx__)
   vacc_lo = vuzp1q_s32(
       vreinterpretq_s32_s64(vscaled_acc01),
       vreinterpretq_s32_s64(vscaled_acc23));
@@ -160,3 +160,5 @@ void pytorch_q8gavgpool_ukernel_up8xm__neon(
     vst1_lane_u8(output, vout, 0);
   }
 }
+#endif
+

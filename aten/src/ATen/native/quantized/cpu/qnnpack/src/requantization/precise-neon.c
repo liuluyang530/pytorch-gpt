@@ -126,7 +126,7 @@ void pytorch_qnnp_requantize_precise__neon(
     const int64x2_t w01_scaled = vrshlq_s64(w01_adjusted_product, vshift);
     const int64x2_t w23_scaled = vrshlq_s64(w23_adjusted_product, vshift);
 
-#ifdef __aarch64__ || __gptx__
+#if defined(__aarch64__) || defined(__gptx__)
     const int32x4_t x_scaled = vuzp1q_s32(
         vreinterpretq_s32_s64(x01_scaled), vreinterpretq_s32_s64(x23_scaled));
     const int32x4_t y_scaled = vuzp1q_s32(

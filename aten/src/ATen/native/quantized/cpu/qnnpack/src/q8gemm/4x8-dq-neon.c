@@ -6,11 +6,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-#include <arm_neon.h>
+//#include <arm_neon.h>
 
 #include <qnnpack/q8gemm.h>
 #include <requantization/runtime-neon.h>
-
+#if 0
 void pytorch_q8gemm_dq_ukernel_4x8__neon(
     size_t mr,
     size_t nr,
@@ -584,3 +584,5 @@ void pytorch_q8gemm_dq_ukernel_4x8__neon(
     vst1q_lane_f32(c3, *vout3_ptr, 0);
   }
 }
+#endif
+

@@ -8,10 +8,10 @@
 
 #include <assert.h>
 
-#include <arm_neon.h>
+//#include <arm_neon.h>
 
 #include <qnnpack/q8gavgpool.h>
-
+#if 0 
 void pytorch_q8gavgpool_ukernel_up8x7__neon(
     size_t m,
     size_t n,
@@ -51,7 +51,7 @@ void pytorch_q8gavgpool_ukernel_up8x7__neon(
     i6 = zero;
   }
   const int32x4_t vbias = vld1q_dup_s32(&quantization_params->neon.bias);
-#ifdef __aarch64__ || __gptx__
+#if defined(__aarch64__) || defined(__gptx__)
   const int32x4_t vmultiplier =
       vld1q_dup_s32(&quantization_params->neon.multiplier);
 #else
@@ -142,7 +142,7 @@ void pytorch_q8gavgpool_ukernel_up8x7__neon(
     const int64x2_t vscaled_acc67 =
         vrshlq_s64(vadjusted_product67, vleft_shift);
 
-#ifdef __aarch64__ || __gptx__
+#if defined(__aarch64__) || defined(__gptx__)
     vacc_lo = vuzp1q_s32(
         vreinterpretq_s32_s64(vscaled_acc01),
         vreinterpretq_s32_s64(vscaled_acc23));
@@ -255,7 +255,7 @@ void pytorch_q8gavgpool_ukernel_up8x7__neon(
     const int64x2_t vscaled_acc67 =
         vrshlq_s64(vadjusted_product67, vleft_shift);
 
-#ifdef __aarch64__ || __gptx__
+#if defined(__aarch64__) || defined(__gptx__)
     vacc_lo = vuzp1q_s32(
         vreinterpretq_s32_s64(vscaled_acc01),
         vreinterpretq_s32_s64(vscaled_acc23));
@@ -295,3 +295,5 @@ void pytorch_q8gavgpool_ukernel_up8x7__neon(
     }
   }
 }
+#endif
+

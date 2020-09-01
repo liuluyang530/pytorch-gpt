@@ -6,10 +6,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-#include <arm_neon.h>
+//#include <arm_neon.h>
 
 #include <qnnpack/q8dwconv.h>
-
+#if 0
 void pytorch_q8dwconv_ukernel_mp8x25__neon(
     size_t channels,
     size_t output_width,
@@ -760,7 +760,7 @@ void pytorch_q8dwconv_ukernel_mp8x25__neon(
         vacc_lo = vrshlq_s32(vacc_lo, vright_shift);
         vacc_hi = vrshlq_s32(vacc_hi, vright_shift);
 
-#ifdef __aarch64__ || __gptx__
+#if defined(__aarch64__) || defined(__gptx__)
         const int16x8_t vacc = vqaddq_s16(
             vqmovn_high_s32(vqmovn_s32(vacc_lo), vacc_hi), vzero_point);
 #else
@@ -868,7 +868,7 @@ void pytorch_q8dwconv_ukernel_mp8x25__neon(
         vacc_lo = vrshlq_s32(vacc_lo, vright_shift);
         vacc_hi = vrshlq_s32(vacc_hi, vright_shift);
 
-#ifdef __aarch64__ || __gptx__
+#if defined(__aarch64__) || defined(__gptx__)
         const int16x8_t vacc = vqaddq_s16(
             vqmovn_high_s32(vqmovn_s32(vacc_lo), vacc_hi), vzero_point);
 #else
@@ -906,3 +906,6 @@ void pytorch_q8dwconv_ukernel_mp8x25__neon(
     output = (uint8_t*)((uintptr_t)output + output_increment);
   } while (--output_width != 0);
 }
+
+#endif
+

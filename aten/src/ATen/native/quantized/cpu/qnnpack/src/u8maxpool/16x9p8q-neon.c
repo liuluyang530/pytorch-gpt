@@ -8,10 +8,10 @@
 
 #include <assert.h>
 
-#include <arm_neon.h>
+//#include <arm_neon.h>
 
 #include <qnnpack/u8maxpool.h>
-
+#if 0
 void pytorch_u8maxpool_ukernel_16x9p8q__neon(
     size_t n,
     size_t ks,
@@ -249,3 +249,5 @@ void pytorch_u8maxpool_ukernel_16x9p8q__neon(
     output = (uint8_t*)((uintptr_t)o + output_increment);
   } while (--n != 0);
 }
+#endif
+

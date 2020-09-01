@@ -8,7 +8,9 @@
 
 #pragma once
 
-#include <arm_neon.h>
+//#include <arm_neon.h>
+typedef short uint16x8_t;
+typedef char uint8x8_t;
 
 PYTORCH_QNNP_INLINE uint16x8_t
 sub_zero_point(const uint8x8_t va, const uint8x8_t vzp) {

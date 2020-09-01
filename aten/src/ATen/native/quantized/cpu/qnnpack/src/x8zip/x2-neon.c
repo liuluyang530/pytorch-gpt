@@ -6,10 +6,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-#include <arm_neon.h>
+//#include <arm_neon.h>
 
 #include <qnnpack/x8zip.h>
-
+#if 0
 void pytorch_qnnp_x8zip_x2__neon(size_t n, const void* input, void* output) {
   const uint8_t* x = input;
   const uint8_t* y = x + n;
@@ -44,3 +44,5 @@ void pytorch_qnnp_x8zip_x2__neon(size_t n, const void* input, void* output) {
     } while (--n != 0);
   }
 }
+#endif
+
