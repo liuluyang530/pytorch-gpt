@@ -6,7 +6,7 @@
 #endif
 
 #include <atomic>
-#if ATOMIC_INT_LOCK_FREE == 2
+#if ATOMIC_INT_LOCK_FREE == 2 || defined(__gptx__)
 #define TH_ATOMIC_IPC_REFCOUNT 1
 #endif
 

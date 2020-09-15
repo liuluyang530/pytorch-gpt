@@ -4,6 +4,7 @@
 #include <caffe2/core/init.h>
 #include <caffe2/core/operator.h>
 
+#ifndef __gptx__
 TEST(Caffe2ToPytorch, SimpleLegacy) {
   caffe2::Tensor c2_tensor(caffe2::CPU);
   c2_tensor.Resize(4, 4);
@@ -297,3 +298,5 @@ TEST(PytorchToCaffe2, Nullptr) {
   caffe2::Tensor c2_tensor(at_tensor);
   ASSERT_FALSE(c2_tensor.defined());
 }
+
+#endif
