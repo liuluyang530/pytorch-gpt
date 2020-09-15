@@ -6,11 +6,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-//#include <arm_neon.h>
+#ifndef __gptx__
+#include <arm_neon.h>
+#endif
 
 #include <qnnpack/q8gemm.h>
 #include <requantization/runtime-neon.h>
-#if 0
+
+#ifndef __gptx__
 void pytorch_q8gemm_dq_ukernel_4x8__neon(
     size_t mr,
     size_t nr,

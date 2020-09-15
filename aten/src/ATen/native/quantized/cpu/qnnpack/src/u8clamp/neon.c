@@ -8,10 +8,13 @@
 
 #include <assert.h>
 
-//#include <arm_neon.h>
+#ifndef __gptx__
+#include <arm_neon.h>
+#endif
 
 #include <qnnpack/u8clamp.h>
-#if 0
+
+#ifndef __gptx__
 void pytorch_u8clamp_ukernel__neon(
     size_t n,
     const uint8_t* x,

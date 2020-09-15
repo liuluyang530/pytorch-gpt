@@ -9,7 +9,7 @@
 #include <qnnpack/assembly.h>
 #include <requantization/runtime-assembly.h>
 
-#if 0
+#ifndef __gptx__
 
 # params
 # c_stride

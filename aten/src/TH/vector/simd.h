@@ -45,8 +45,7 @@ enum SIMDExtensions
 };
 
 
-#if defined(__arm__) || defined(__aarch64__)  || defined(__gptx__)
-// incl. armel, armhf, arm64
+#if defined(__arm__) || defined(__aarch64__)  || defined(__gptx__)  // incl. armel, armhf, arm64
 
  #if defined(__NEON__)
 

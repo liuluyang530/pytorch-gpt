@@ -389,12 +389,16 @@ static void* thread_main(void* arg) {
       case threadpool_command_compute_1d:
       {
         if (flags & PTHREADPOOL_FLAG_DISABLE_DENORMALS) {
-          //saved_fpu_state = get_fpu_state();
-          //disable_fpu_denormals();
+#ifndef __gptx__
+          saved_fpu_state = get_fpu_state();
+          disable_fpu_denormals();
+#endif
         }
         thread_parallelize_1d(threadpool, thread);
         if (flags & PTHREADPOOL_FLAG_DISABLE_DENORMALS) {
-          //set_fpu_state(saved_fpu_state);
+#ifndef __gptx__
+          set_fpu_state(saved_fpu_state);
+#endif
         }
         break;
       }
@@ -496,14 +500,18 @@ void pthreadpool_parallelize_1d(
     /* No thread pool used: execute task sequentially on the calling thread */
     struct fpu_state saved_fpu_state = { 0 };
     if (flags & PTHREADPOOL_FLAG_DISABLE_DENORMALS) {
-      //saved_fpu_state = get_fpu_state();
-      //disable_fpu_denormals();
+#ifndef __gptx__
+      saved_fpu_state = get_fpu_state();
+      disable_fpu_denormals();
+#endif
     }
     for (size_t i = 0; i < range; i++) {
       task(argument, i);
     }
     if (flags & PTHREADPOOL_FLAG_DISABLE_DENORMALS) {
-      //set_fpu_state(saved_fpu_state);
+#ifndef __gptx__
+      set_fpu_state(saved_fpu_state);
+#endif
     }
   } else {
     /* Protect the global threadpool structures */
@@ -572,8 +580,10 @@ void pthreadpool_parallelize_1d(
     /* Save and modify FPU denormals control, if needed */
     struct fpu_state saved_fpu_state = { 0 };
     if (flags & PTHREADPOOL_FLAG_DISABLE_DENORMALS) {
-      //saved_fpu_state = get_fpu_state();
-      //disable_fpu_denormals();
+#ifndef __gptx__
+      saved_fpu_state = get_fpu_state();
+      disable_fpu_denormals();
+#endif
     }
 
     /* Do computations as worker #0 */
@@ -581,7 +591,9 @@ void pthreadpool_parallelize_1d(
 
     /* Restore FPU denormals control, if needed */
     if (flags & PTHREADPOOL_FLAG_DISABLE_DENORMALS) {
-      //set_fpu_state(saved_fpu_state);
+#ifndef __gptx__
+      set_fpu_state(saved_fpu_state);
+#endif
     }
 
     /* Wait until the threads finish computation */
@@ -621,14 +633,18 @@ void pthreadpool_parallelize_1d_tile_1d(
     /* No thread pool used: execute task sequentially on the calling thread */
     struct fpu_state saved_fpu_state = { 0 };
     if (flags & PTHREADPOOL_FLAG_DISABLE_DENORMALS) {
-      //saved_fpu_state = get_fpu_state();
-      //disable_fpu_denormals();
+#ifndef __gptx__
+      saved_fpu_state = get_fpu_state();
+      disable_fpu_denormals();
+#endif
     }
     for (size_t i = 0; i < range; i += tile) {
       task(argument, i, min(range - i, tile));
     }
     if (flags & PTHREADPOOL_FLAG_DISABLE_DENORMALS) {
-      //set_fpu_state(saved_fpu_state);
+#ifndef __gptx__
+      set_fpu_state(saved_fpu_state);
+#endif
     }
   } else {
     /* Execute in parallel on the thread pool using linearized index */
@@ -667,8 +683,10 @@ void pthreadpool_parallelize_2d(
     /* No thread pool used: execute task sequentially on the calling thread */
     struct fpu_state saved_fpu_state = { 0 };
     if (flags & PTHREADPOOL_FLAG_DISABLE_DENORMALS) {
-      //saved_fpu_state = get_fpu_state();
-      //disable_fpu_denormals();
+#ifndef __gptx__
+      saved_fpu_state = get_fpu_state();
+      disable_fpu_denormals();
+#endif
     }
     for (size_t i = 0; i < range_i; i++) {
       for (size_t j = 0; j < range_j; j++) {
@@ -676,7 +694,9 @@ void pthreadpool_parallelize_2d(
       }
     }
     if (flags & PTHREADPOOL_FLAG_DISABLE_DENORMALS) {
-      //set_fpu_state(saved_fpu_state);
+#ifndef __gptx__
+      set_fpu_state(saved_fpu_state);
+#endif
     }
   } else {
     /* Execute in parallel on the thread pool using linearized index */
@@ -721,8 +741,10 @@ void pthreadpool_parallelize_2d_tile_1d(
     /* No thread pool used: execute task sequentially on the calling thread */
     struct fpu_state saved_fpu_state = { 0 };
     if (flags & PTHREADPOOL_FLAG_DISABLE_DENORMALS) {
-      //saved_fpu_state = get_fpu_state();
-      //disable_fpu_denormals();
+#ifndef __gptx__
+      saved_fpu_state = get_fpu_state();
+      disable_fpu_denormals();
+#endif
     }
     for (size_t i = 0; i < range_i; i++) {
       for (size_t j = 0; j < range_j; j += tile_j) {
@@ -730,7 +752,9 @@ void pthreadpool_parallelize_2d_tile_1d(
       }
     }
     if (flags & PTHREADPOOL_FLAG_DISABLE_DENORMALS) {
-      //set_fpu_state(saved_fpu_state);
+#ifndef __gptx__
+      set_fpu_state(saved_fpu_state);
+#endif
     }
   } else {
     /* Execute in parallel on the thread pool using linearized index */
@@ -783,8 +807,10 @@ void pthreadpool_parallelize_2d_tile_2d(
     /* No thread pool used: execute task sequentially on the calling thread */
     struct fpu_state saved_fpu_state = { 0 };
     if (flags & PTHREADPOOL_FLAG_DISABLE_DENORMALS) {
-      //saved_fpu_state = get_fpu_state();
-      ////disable_fpu_denormals();
+#ifndef __gptx__
+      saved_fpu_state = get_fpu_state();
+      disable_fpu_denormals();
+#endif
     }
     for (size_t i = 0; i < range_i; i += tile_i) {
       for (size_t j = 0; j < range_j; j += tile_j) {
@@ -792,7 +818,9 @@ void pthreadpool_parallelize_2d_tile_2d(
       }
     }
     if (flags & PTHREADPOOL_FLAG_DISABLE_DENORMALS) {
-      //set_fpu_state(saved_fpu_state);
+#ifndef __gptx__
+      set_fpu_state(saved_fpu_state);
+#endif
     }
   } else {
     /* Execute in parallel on the thread pool using linearized index */
@@ -852,8 +880,10 @@ void pthreadpool_parallelize_3d_tile_2d(
     /* No thread pool used: execute task sequentially on the calling thread */
     struct fpu_state saved_fpu_state = { 0 };
     if (flags & PTHREADPOOL_FLAG_DISABLE_DENORMALS) {
-      //saved_fpu_state = get_fpu_state();
-      //disable_fpu_denormals();
+#ifndef __gptx__
+      saved_fpu_state = get_fpu_state();
+      disable_fpu_denormals();
+#endif
     }
     for (size_t i = 0; i < range_i; i++) {
       for (size_t j = 0; j < range_j; j += tile_j) {
@@ -863,7 +893,9 @@ void pthreadpool_parallelize_3d_tile_2d(
       }
     }
     if (flags & PTHREADPOOL_FLAG_DISABLE_DENORMALS) {
-      //set_fpu_state(saved_fpu_state);
+#ifndef __gptx__
+      set_fpu_state(saved_fpu_state);
+#endif
     }
   } else {
     /* Execute in parallel on the thread pool using linearized index */
@@ -931,8 +963,10 @@ void pthreadpool_parallelize_4d_tile_2d(
     /* No thread pool used: execute task sequentially on the calling thread */
     struct fpu_state saved_fpu_state = { 0 };
     if (flags & PTHREADPOOL_FLAG_DISABLE_DENORMALS) {
-      //saved_fpu_state = get_fpu_state();
-      //disable_fpu_denormals();
+#ifndef __gptx__
+      saved_fpu_state = get_fpu_state();
+      disable_fpu_denormals();
+#endif
     }
     for (size_t i = 0; i < range_i; i++) {
       for (size_t j = 0; j < range_j; j++) {
@@ -945,7 +979,9 @@ void pthreadpool_parallelize_4d_tile_2d(
       }
     }
     if (flags & PTHREADPOOL_FLAG_DISABLE_DENORMALS) {
-      //set_fpu_state(saved_fpu_state);
+#ifndef __gptx__
+      set_fpu_state(saved_fpu_state);
+#endif
     }
   } else {
     /* Execute in parallel on the thread pool using linearized index */
@@ -1020,8 +1056,10 @@ void pthreadpool_parallelize_5d_tile_2d(
     /* No thread pool used: execute task sequentially on the calling thread */
     struct fpu_state saved_fpu_state = { 0 };
     if (flags & PTHREADPOOL_FLAG_DISABLE_DENORMALS) {
-      //saved_fpu_state = get_fpu_state();
-      //disable_fpu_denormals();
+#ifndef __gptx__
+      saved_fpu_state = get_fpu_state();
+      disable_fpu_denormals();
+#endif
     }
     for (size_t i = 0; i < range_i; i++) {
       for (size_t j = 0; j < range_j; j++) {
@@ -1036,7 +1074,9 @@ void pthreadpool_parallelize_5d_tile_2d(
       }
     }
     if (flags & PTHREADPOOL_FLAG_DISABLE_DENORMALS) {
-      //set_fpu_state(saved_fpu_state);
+#ifndef __gptx__
+      set_fpu_state(saved_fpu_state);
+#endif
     }
   } else {
     /* Execute in parallel on the thread pool using linearized index */
@@ -1117,8 +1157,10 @@ void pthreadpool_parallelize_6d_tile_2d(
     /* No thread pool used: execute task sequentially on the calling thread */
     struct fpu_state saved_fpu_state = { 0 };
     if (flags & PTHREADPOOL_FLAG_DISABLE_DENORMALS) {
-      //saved_fpu_state = get_fpu_state();
-      //disable_fpu_denormals();
+#ifndef __gptx__
+      saved_fpu_state = get_fpu_state();
+      disable_fpu_denormals();
+#endif
     }
     for (size_t i = 0; i < range_i; i++) {
       for (size_t j = 0; j < range_j; j++) {
@@ -1135,7 +1177,9 @@ void pthreadpool_parallelize_6d_tile_2d(
       }
     }
     if (flags & PTHREADPOOL_FLAG_DISABLE_DENORMALS) {
-      //set_fpu_state(saved_fpu_state);
+#ifndef __gptx__
+      set_fpu_state(saved_fpu_state);
+#endif
     }
   } else {
     /* Execute in parallel on the thread pool using linearized index */

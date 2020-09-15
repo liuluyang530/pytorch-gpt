@@ -10,7 +10,8 @@
 #include <requantization/runtime-assembly.h>
 
 .syntax unified
-#if 0
+
+#ifndef __gptx__
 # void pytorch_q8gemm_ukernel_4x8__aarch32_neon(
 #     size_t mr,
 #     size_t nr,

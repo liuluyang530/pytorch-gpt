@@ -9,7 +9,7 @@
 #include <qnnpack/assembly.h>
 #include <requantization/runtime-assembly.h>
 
-#if 0
+#ifndef __gptx__
 # void pytorch_q8conv_ukernel_8x8__aarch64_neon(
 #    size_t mr,
 #    size_t nr,

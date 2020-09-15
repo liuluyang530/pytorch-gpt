@@ -10,7 +10,7 @@
 
 .syntax unified
 
-#if 0
+#ifndef __gptx__
 
 # void pytorch_q8gemm_xzp_ukernel_4x8c2__neon(
 #     size_t mr,

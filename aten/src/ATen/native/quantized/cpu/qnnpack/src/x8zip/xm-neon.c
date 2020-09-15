@@ -6,11 +6,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-//#include <arm_neon.h>
+#ifndef __gptx__
+#include <arm_neon.h>
+#endif
 
 
 #include <qnnpack/x8zip.h>
-#if 0
+
+#ifndef __gptx__
 void pytorch_qnnp_x8zip_xm__neon(
     size_t n,
     size_t m,

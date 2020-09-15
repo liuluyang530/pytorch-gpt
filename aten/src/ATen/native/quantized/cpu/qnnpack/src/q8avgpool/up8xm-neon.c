@@ -8,10 +8,13 @@
 
 #include <assert.h>
 
-//#include <arm_neon.h>
+#ifndef __gptx__
+#include <arm_neon.h>
+#endif
 
 #include <qnnpack/q8avgpool.h>
-#if 0
+
+#ifndef __gptx__
 void pytorch_q8avgpool_ukernel_up8xm__neon(
     size_t n,
     size_t ks,

@@ -8,10 +8,13 @@
 
 #include <assert.h>
 
-//#include <arm_neon.h>
+#ifndef __gptx__
+#include <arm_neon.h>
+#endif
 
 #include <qnnpack/u8rmax.h>
-#if 0
+
+#ifndef __gptx__
 uint8_t pytorch_u8rmax_ukernel__neon(size_t n, const uint8_t* x) {
   assert(n != 0);
 

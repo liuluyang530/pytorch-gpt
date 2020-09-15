@@ -8,7 +8,8 @@
 
 #include <qnnpack/assembly.h>
 #include <requantization/runtime-assembly.h>
-#if 0
+
+#ifndef __gptx__
 
 # r0 mr
 # r1 nr

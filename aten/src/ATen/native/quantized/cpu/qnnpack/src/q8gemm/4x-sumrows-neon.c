@@ -6,10 +6,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-//#include <arm_neon.h>
+#ifndef __gptx__
+#include <arm_neon.h>
+#endif
 
 #include <qnnpack/q8gemm.h>
-#if 0
+
+#ifndef __gptx__
 void pytorch_q8sumrows_ukernel_4x__neon(
     const uint8_t* restrict a,
     size_t m,

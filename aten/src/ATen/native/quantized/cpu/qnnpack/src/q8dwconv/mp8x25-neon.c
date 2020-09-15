@@ -6,10 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-//#include <arm_neon.h>
+#ifndef __gptx__
+#include <arm_neon.h>
+#endif
 
 #include <qnnpack/q8dwconv.h>
-#if 0
+#ifndef __gptx__
 void pytorch_q8dwconv_ukernel_mp8x25__neon(
     size_t channels,
     size_t output_width,
