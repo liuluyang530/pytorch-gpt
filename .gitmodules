@@ -9,7 +9,8 @@
 [submodule "third_party/eigen"]
     ignore = dirty
     path = third_party/eigen
-    url = https://github.com/eigenteam/eigen-git-mirror.git
+#	url = https://github.com/eigenteam/eigen-git-mirror.git
+	url = https://github.com/liuluyang530/eigen-git-mirror-gpt.git 
 [submodule "third_party/googletest"]
     ignore = dirty
     path = third_party/googletest
@@ -17,7 +18,9 @@
 [submodule "third_party/benchmark"]
     ignore = dirty
     path = third_party/benchmark
-    url = https://github.com/google/benchmark.git
+	#url = https://github.com/google/benchmark.git
+	url = https://github.com/liuluyang530/benchmark-gpt.git
+	branch = 505be9
 [submodule "third_party/protobuf"]
     ignore = dirty
     path = third_party/protobuf
@@ -29,7 +32,8 @@
 [submodule "third_party/NNPACK"]
     ignore = dirty
     path = third_party/NNPACK
-    url = https://github.com/Maratyszcza/NNPACK.git
+#    url = https://github.com/Maratyszcza/NNPACK.git
+	url = https://github.com/liuluyang530/NNPACK-gpt.git
 [submodule "third_party/gloo"]
     ignore = dirty
     path = third_party/gloo
@@ -45,11 +49,13 @@
 [submodule "third_party/NNPACK_deps/FP16"]
     ignore = dirty
     path = third_party/FP16
-    url = https://github.com/Maratyszcza/FP16.git
+	#url = https://github.com/Maratyszcza/FP16.git
+	url = https://github.com/liuluyang530/FP16-gpt.git
 [submodule "third_party/NNPACK_deps/psimd"]
     ignore = dirty
     path = third_party/psimd
-    url = https://github.com/Maratyszcza/psimd.git
+#    url = https://github.com/Maratyszcza/psimd.git
+	url = https://github.com/liuluyang530/psimd-gpt.git
 [submodule "third_party/zstd"]
     ignore = dirty
     path = third_party/zstd
@@ -57,7 +63,8 @@
 [submodule "third-party/cpuinfo"]
     ignore = dirty
     path = third_party/cpuinfo
-    url = https://github.com/pytorch/cpuinfo.git
+#    url = https://github.com/pytorch/cpuinfo.git
+	url = https://github.com/liuluyang530/cpuinfo-gpt.git
 [submodule "third_party/python-enum"]
     ignore = dirty
     path = third_party/python-enum
@@ -93,11 +100,13 @@
 [submodule "third_party/gemmlowp/gemmlowp"]
     ignore = dirty
     path = third_party/gemmlowp/gemmlowp
-    url = https://github.com/google/gemmlowp.git
+#    url = https://github.com/google/gemmlowp.git
+	url = https://github.com/liuluyang530/gemmlowp-gpt.git
 [submodule "third_party/QNNPACK"]
     ignore = dirty
     path = third_party/QNNPACK
-    url = https://github.com/pytorch/QNNPACK
+ #   url = https://github.com/pytorch/QNNPACK
+	url = https://github.com/liuluyang530/QNNPACK-gpt.git 
 [submodule "third_party/neon2sse"]
     ignore = dirty
     path = third_party/neon2sse
@@ -105,7 +114,8 @@
 [submodule "third_party/fbgemm"]
     ignore = dirty
     path = third_party/fbgemm
-    url = https://github.com/pytorch/fbgemm
+#    url = https://github.com/pytorch/fbgemm
+	url = https://github.com/liuluyang530/fbgemm-gpt.git
 [submodule "third_party/foxi"]
     ignore = dirty
     path = third_party/foxi
@@ -121,4 +131,5 @@
 [submodule "third_party/XNNPACK"]
     ignore = dirty
     path = third_party/XNNPACK
-    url = https://github.com/google/XNNPACK.git
+#    url = https://github.com/google/XNNPACK.git
+	url = https://github.com/liuluyang530/XNNPACK-gpt.git
