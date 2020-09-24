@@ -42,7 +42,8 @@
 [submodule "third_party/NNPACK_deps/pthreadpool"]
     ignore = dirty
     path = third_party/pthreadpool
-    url = https://github.com/Maratyszcza/pthreadpool.git
+#	url = https://github.com/Maratyszcza/pthreadpool.git
+	url = https://github.com/liuluyang530/pthreadpool-gpt.git 
 [submodule "third_party/NNPACK_deps/FXdiv"]
     ignore = dirty
     path = third_party/FXdiv
